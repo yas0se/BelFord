@@ -28,6 +28,7 @@ let s = 'e';//deppart
 let terminal = {};
 let changed = [s];
 let tempchanged = [];
+let nbS = 0;
 
 for (const key in t) {
     terminal[key] = 'infinity'; 
@@ -37,10 +38,11 @@ for (const key in t) {
     if (key === s) {
         terminal[key] = 0
     }
+    nbS++
 }
 console.log('terminal 1: ', terminal);
 
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < nbS; i++) {
     for (const key of changed) {
         t[key].forEach(([relatedKey, value]) => {
             console.log(`  - terminal[${relatedKey}]: `, terminal[relatedKey], ` avec un poids de ${value}`);
@@ -64,7 +66,7 @@ for (let i = 0; i < 4; i++) {
     tempchanged = []
     console.log(i + 1, ' changed: ', changed);
 
-    if (i === 3 && changed.length !== 0) {
+    if (i === nbS-1 && changed.length !== 0) {
         console.log('presence d un boucle negative!!!')
     }
 
